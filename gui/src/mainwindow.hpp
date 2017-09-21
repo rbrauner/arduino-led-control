@@ -11,8 +11,7 @@ namespace Ui {
   class MainWindow;
 }
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
   Q_OBJECT
 
 public:
@@ -21,6 +20,9 @@ public:
 
 protected:
   void changeEvent(QEvent *e);
+
+private slots:
+  void on_dial_sliderMoved(int position);
 
 private:
   Ui::MainWindow *ui;

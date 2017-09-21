@@ -1,20 +1,15 @@
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-  QMainWindow(parent),
-  ui(new Ui::MainWindow)
-{
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
   delete ui;
 }
 
-void MainWindow::changeEvent(QEvent *e)
-{
+void MainWindow::changeEvent(QEvent *e) {
   QMainWindow::changeEvent(e);
   switch (e->type()) {
     case QEvent::LanguageChange:
@@ -23,4 +18,8 @@ void MainWindow::changeEvent(QEvent *e)
     default:
       break;
   }
+}
+
+void MainWindow::on_dial_sliderMoved(int position) {
+
 }
