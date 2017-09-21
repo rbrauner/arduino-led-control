@@ -8,6 +8,7 @@
 #endif
 
 #include "lcdvalue.hpp"
+#include <QSerialPort>
 
 namespace Ui {
   class MainWindow;
@@ -29,6 +30,7 @@ private slots:
 private:
   Ui::MainWindow *ui;
   LcdValue lcdValue;
+  QSerialPort serial;
 
   void setLcdValueByPercentage(const int &percentage);
   void sendValueToSerial();

@@ -1,7 +1,7 @@
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), serial("/dev/ttyACM0") {
   ui->setupUi(this);
 }
 
@@ -31,7 +31,12 @@ void MainWindow::setLcdValueByPercentage(const int &percentage) {
 }
 
 void MainWindow::sendValueToSerial() {
+  char tempValue = static_cast<char>(lcdValue.getValue());
+  char *valueToSend = &tempValue;
 
+  serial.open(QIODevice::WriteOnly);
+  serial.write(valueToSend);
+  serial.close();
 }
 
 void MainWindow::updateLcd() {
