@@ -32,6 +32,8 @@ private:
   LcdValue lcdValue;
   QSerialPort serial;
 
+  void setupSerial();
+
   void setLcdValueByPercentage(const int &percentage);
   void sendValueToSerial();
   void updateLcd();

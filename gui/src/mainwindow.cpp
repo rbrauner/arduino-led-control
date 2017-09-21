@@ -1,8 +1,9 @@
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), serial("/dev/ttyACM0") {
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), serial(this) {
   ui->setupUi(this);
+  setupSerial();
 }
 
 MainWindow::~MainWindow() {
@@ -26,6 +27,15 @@ void MainWindow::on_dial_sliderMoved(int position) {
   updateLcd();
 }
 
+void MainWindow::setupSerial() {
+  serial.setPortName("ttyACM0");
+  serial.setBaudRate(serial.Baud9600);
+  serial.setDataBits(QSerialPort::Data8);
+  serial.setParity(QSerialPort::NoParity);
+  serial.setStopBits(QSerialPort::OneStop);
+  serial.setFlowControl(QSerialPort::NoFlowControl);
+}
+
 void MainWindow::setLcdValueByPercentage(const int &percentage) {
   lcdValue.setValueByPercentage(percentage);
 }
@@ -36,6 +46,7 @@ void MainWindow::sendValueToSerial() {
 
   serial.open(QIODevice::WriteOnly);
   serial.write(valueToSend);
+  serial.flush();
   serial.close();
 }
 
