@@ -12,15 +12,19 @@ int main() {
   Serial.begin(9600);
 
   int ledBrightness = 0;
+  int tempLedBrightness = 0;
 
   pinMode(BUILT_IN_LED, OUTPUT);
   pinMode(LED, OUTPUT);
 
   while (true) {
-    Serial >> ledBrightness;
+    if (Serial.available()) {
+      Serial >> tempLedBrightness;
+      ledBrightness = tempLedBrightness;
 
-    if (isValueInRangeOfPwm(ledBrightness)) {
-      analogWrite(LED, ledBrightness);
+      if (isValueInRangeOfPwm(ledBrightness)) {
+        analogWrite(LED, ledBrightness);
+      }
     }
   }
 }
