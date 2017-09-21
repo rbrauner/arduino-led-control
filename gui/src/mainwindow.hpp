@@ -30,7 +30,9 @@ private:
   Ui::MainWindow *ui;
   LcdValue lcdValue;
 
-  void setLcd(const int &value);
+  void setLcdValueByPercentage(const int &percentage);
+  void sendValueToSerial();
+  void updateLcd();
 };
 
 #endif // MAINWINDOW_HPP

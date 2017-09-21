@@ -21,11 +21,20 @@ void MainWindow::changeEvent(QEvent *e) {
 }
 
 void MainWindow::on_dial_sliderMoved(int position) {
-  setLcd(position);
+  setLcdValueByPercentage(position);
+  sendValueToSerial();
+  updateLcd();
 }
 
-void MainWindow::setLcd(const int &value) {
-  lcdValue.setValueByPercentage(value);
+void MainWindow::setLcdValueByPercentage(const int &percentage) {
+  lcdValue.setValueByPercentage(percentage);
+}
+
+void MainWindow::sendValueToSerial() {
+
+}
+
+void MainWindow::updateLcd() {
   int valueToDisplay = lcdValue.getValue();
   ui->lcdNumber->display(valueToDisplay);
 }
