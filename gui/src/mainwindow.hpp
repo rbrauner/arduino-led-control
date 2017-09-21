@@ -7,6 +7,8 @@
 #include <QMainWindow>
 #endif
 
+#include "lcdvalue.hpp"
+
 namespace Ui {
   class MainWindow;
 }
@@ -26,6 +28,9 @@ private slots:
 
 private:
   Ui::MainWindow *ui;
+  LcdValue lcdValue;
+
+  void setLcd(const int &value);
 };
 
 #endif // MAINWINDOW_HPP

@@ -21,5 +21,11 @@ void MainWindow::changeEvent(QEvent *e) {
 }
 
 void MainWindow::on_dial_sliderMoved(int position) {
+  setLcd(position);
+}
 
+void MainWindow::setLcd(const int &value) {
+  lcdValue.setValueByPercentage(value);
+  int valueToDisplay = lcdValue.getValue();
+  ui->lcdNumber->display(valueToDisplay);
 }

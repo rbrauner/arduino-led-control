@@ -5,7 +5,7 @@ LcdValue::LcdValue() : value(0) {
 }
 
 void LcdValue::setValueByPercentage(int percentage) {
-  value = percentageToFraction(percentage) * MAX;
+  value = static_cast<int>(percentageToFraction(percentage) * MAX);
 }
 
 int LcdValue::getValue() const {
