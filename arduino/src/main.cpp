@@ -3,15 +3,32 @@
 using namespace au;
 
 const int BUILT_IN_LED = 13;
+const int LED = 3;
+
+bool isValueInRangeOfPwm(int value);
 
 int main() {
   init();
   Serial.begin(9600);
-	
+
+  int ledBrightness = 0;
+
   pinMode(BUILT_IN_LED, OUTPUT);
   pinMode(LED, OUTPUT);
 
   while (true) {
+    Serial >> ledBrightness;
 
+    if (isValueInRangeOfPwm(ledBrightness)) {
+      analogWrite(LED, ledBrightness);
+    }
   }
+}
+
+bool isValueInRangeOfPwm(int value) {
+  bool result = false;
+
+  if (value >= 0 && value < 255) { result = true; }
+
+  return result;
 }
