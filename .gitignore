@@ -39,3 +39,4 @@ CMakeLists.txt.user*
 
 # other
 arduino/bin
+*.user
