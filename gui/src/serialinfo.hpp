@@ -7,8 +7,8 @@
 struct SerialInfo {
   bool isAviable;
   QString portName;
-  const quint16 vendorId;
-  const quint16 productId;
+  quint16 vendorId;
+  quint16 productId;
   QSerialPort::BaudRate baudRate;
   QSerialPort::DataBits dataBits;
   QSerialPort::Parity parity;
