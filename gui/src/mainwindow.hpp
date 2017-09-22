@@ -40,7 +40,7 @@ private:
   void setupSerial();
   void closeSerial();
 
-  void setLcdValueByPercentage(const int &percentage);
+  void setLcdValue(const int &value);
   void sendValueToSerial();
   void updateLcd();
 };

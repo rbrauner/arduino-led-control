@@ -26,7 +26,7 @@ void MainWindow::changeEvent(QEvent *e) {
 }
 
 void MainWindow::on_dial_sliderMoved(int position) {
-  setLcdValueByPercentage(position);
+  setLcdValue(position);
   sendValueToSerial();
   updateLcd();
 }
@@ -61,8 +61,8 @@ void MainWindow::closeSerial() {
   serial.close();
 }
 
-void MainWindow::setLcdValueByPercentage(const int &percentage) {
-  lcdValue.setValueByPercentage(percentage);
+void MainWindow::setLcdValue(const int &value) {
+  lcdValue.setValue(value);
 }
 
 void MainWindow::sendValueToSerial() {

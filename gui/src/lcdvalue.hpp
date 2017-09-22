@@ -10,8 +10,8 @@ public:
   int getMin() const;
   int getMax() const;
 
-  void setValueByPercentage(int percentage);
   int getValue() const;
+  void setValue(const int &value);
 
 private:
   enum LcdMinAndMax {
@@ -20,8 +20,6 @@ private:
   };
 
   int value;
-
-  static double percentageToFraction(int percentage);
 };
 
 #endif // LCDVALUE_HPP
