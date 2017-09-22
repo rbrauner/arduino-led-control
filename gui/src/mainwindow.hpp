@@ -32,6 +32,8 @@ private:
   LcdValue lcdValue;
   QSerialPort serial;
 
+  void setMinAndMaxDialValues();
+
   void setSerialPortName(QString portName);
   void openAndSetupSerial();
   void openSerial(const QIODevice::OpenModeFlag &mode);

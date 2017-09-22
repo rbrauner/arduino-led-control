@@ -4,6 +4,8 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), serial(this) {
   ui->setupUi(this);
 
+  setMinAndMaxDialValues();
+
   setSerialPortName("ttyACM0");
   openAndSetupSerial();
 }
@@ -27,6 +29,11 @@ void MainWindow::on_dial_sliderMoved(int position) {
   setLcdValueByPercentage(position);
   sendValueToSerial();
   updateLcd();
+}
+
+void MainWindow::setMinAndMaxDialValues() {
+  ui->dial->setMinimum(lcdValue.getMin());
+  ui->dial->setMaximum(lcdValue.getMax());
 }
 
 void MainWindow::setSerialPortName(QString portName) {

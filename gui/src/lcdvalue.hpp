@@ -7,6 +7,9 @@ class LcdValue {
 public:
   LcdValue();
 
+  int getMin() const;
+  int getMax() const;
+
   void setValueByPercentage(int percentage);
   int getValue() const;
 
