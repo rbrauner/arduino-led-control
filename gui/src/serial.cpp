@@ -2,7 +2,7 @@
 #include <QList>
 #include <QSerialPortInfo>
 
-Serial::Serial() { updateInfo(); }
+Serial::Serial() : selectedSerialInfo(0) { updateInfo(); }
 
 void Serial::updateInfo() {
   clearInfo();
@@ -37,4 +37,103 @@ void Serial::updateInfo() {
   }
 }
 
+void Serial::openAndSetup() {
+  try {
+    isSelectedSerialInfoValidAndAviable();
+    serial.setPortName(selectedSerialInfo->portName);
+    open(QIODevice::ReadWrite);
+    setup();
+  } catch (...) {
+  }
+}
+
+void Serial::close() { serial.close(); }
+
+void Serial::selectSerialInfo(const int &number) {
+  selectedSerialInfo = &info[number];
+}
+
+const Serial &Serial::operator<<(const char &value) {
+  prepareDataAndSendIt(value);
+}
+
+const Serial &Serial::operator<<(const short &value) {
+  prepareDataAndSendIt(value);
+}
+
+const Serial &Serial::operator<<(const int &value) {
+  prepareDataAndSendIt(value);
+}
+
+const Serial &Serial::operator<<(const long &value) {
+  prepareDataAndSendIt(value);
+}
+
+const Serial &Serial::operator<<(const float &value) {
+  prepareDataAndSendIt(value);
+}
+
+const Serial &Serial::operator<<(const double &value) {
+  prepareDataAndSendIt(value);
+}
+
+const Serial &Serial::operator<<(const QString &value) {
+  prepareDataAndSendIt(value);
+}
+
+const Serial &Serial::operator>>(QByteArray &value) { value = receive(); }
+
+void Serial::isSerialOpen() {
+  if (serial.isOpen())
+    return;
+  else
+    throw;
+}
+
+void Serial::send(const QByteArray &data) { serial.write(data); }
+
+QByteArray Serial::receive() { return serial.readAll(); }
+
 void Serial::clearInfo() { info.clear(); }
+
+void Serial::open(const QIODevice::OpenModeFlag &mode) { serial.open(mode); }
+
+void Serial::setup() {
+  serial.setBaudRate(selectedSerialInfo->baudRate);
+  serial.setDataBits(selectedSerialInfo->dataBits);
+  serial.setParity(selectedSerialInfo->parity);
+  serial.setStopBits(selectedSerialInfo->stopBits);
+  serial.setFlowControl(selectedSerialInfo->flowControl);
+}
+
+void Serial::isSelectedSerialInfoValidAndAviable() {
+  if (selectedSerialInfo != NULL && selectedSerialInfo->isAviable == true)
+    return;
+  else
+    throw;
+}
+
+void Serial::prepareDataAndSendIt(const QString &data) {
+  try {
+    const char *dataToSend = data.toStdString().c_str();
+    isSerialOpen();
+    send(dataToSend);
+  } catch (...) {
+  }
+}
+
+template <typename T> QByteArray Serial::prepareDataToSend(const T &data) {
+  QByteArray dataToSend;
+  dataToSend.resize(sizeof(T));
+  dataToSend[0] = static_cast<char>(data);
+  return dataToSend;
+}
+
+template <typename T> void Serial::prepareDataAndSendIt(const T &data) {
+  try {
+    QByteArray dataToSend = prepareDataToSend(data);
+    isSerialOpen();
+    send(dataToSend);
+  } catch (...) {
+  }
+}
