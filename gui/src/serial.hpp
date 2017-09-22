@@ -40,6 +40,7 @@ private:
   void prepareDataAndSendIt(const QString &data);
   template <typename T> QByteArray prepareDataToSend(const T &data);
   void isSerialOpen();
+
   void send(const QByteArray &data);
   QByteArray receive();
 };
