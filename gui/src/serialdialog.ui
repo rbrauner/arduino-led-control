@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>SerialDialog</class>
  <widget class="QDialog" name="SerialDialog">
@@ -5,13 +6,82 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>480</width>
+    <height>320</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <item>
+    <widget class="QComboBox" name="infoEntry"/>
+   </item>
+   <item>
+    <widget class="QTreeWidget" name="infoDetails">
+     <column>
+      <property name="text">
+       <string>Property</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Value</string>
+      </property>
+     </column>
+     <item>
+      <property name="text">
+       <string>Port name</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Vendor ID</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Product ID</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Bound rate</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Data bits</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Parity</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Stop bits</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Flow control</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="selectButton">
+     <property name="text">
+      <string>Select</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>
