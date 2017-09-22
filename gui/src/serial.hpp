@@ -14,6 +14,7 @@ public:
   void openAndSetup();
   void close();
 
+  const QVector<SerialInfo> getInfo() const;
   void selectSerialInfo(const int &number);
 
   const Serial &operator<<(const char &value);

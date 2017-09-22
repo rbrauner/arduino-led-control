@@ -68,6 +68,8 @@ void Serial::setup() {
   serial.setFlowControl(selectedSerialInfo->flowControl);
 }
 
+const QVector<SerialInfo> Serial::getInfo() const { return info; }
+
 void Serial::selectSerialInfo(const int &number) {
   selectedSerialInfo = &info[number];
 }
