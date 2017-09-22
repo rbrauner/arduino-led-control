@@ -15,10 +15,10 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
-    <widget class="QComboBox" name="infoEntry"/>
+    <widget class="QComboBox" name="infoEntryComboBox"/>
    </item>
    <item>
-    <widget class="QTreeWidget" name="infoDetails">
+    <widget class="QTreeWidget" name="infoDetailsTreeWidget">
      <column>
       <property name="text">
        <string>Property</string>
@@ -75,7 +75,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="selectButton">
+    <widget class="QPushButton" name="selectPushButton">
      <property name="text">
       <string>Select</string>
      </property>
