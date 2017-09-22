@@ -66,8 +66,9 @@ void MainWindow::setLcdValue(const int &value) {
 }
 
 void MainWindow::sendValueToSerial() {
-  char tempValue = static_cast<char>(lcdValue.getValue());
-  char *valueToSend = &tempValue;
+  QByteArray valueToSend;
+  valueToSend.resize(1);
+  valueToSend[0] = static_cast<char>(lcdValue.getValue());
 
   serial.write(valueToSend);
   serial.flush();
