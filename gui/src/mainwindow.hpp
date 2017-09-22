@@ -32,7 +32,11 @@ private:
   LcdValue lcdValue;
   QSerialPort serial;
 
+  void setSerialPortName(QString portName);
+  void openAndSetupSerial();
+  void openSerial(const QIODevice::OpenModeFlag &mode);
   void setupSerial();
+  void closeSerial();
 
   void setLcdValueByPercentage(const int &percentage);
   void sendValueToSerial();
