@@ -1,11 +1,7 @@
 #ifndef MAINWINDOW_HPP
 #define MAINWINDOW_HPP
 
-#if QT_VERSION >= 0x050000
-#include <QtWidgets/QMainWindow>
-#else
 #include <QMainWindow>
-#endif
 
 #include "lcdvalue.hpp"
 #include <QSerialPort>
@@ -25,7 +21,7 @@ protected:
   void changeEvent(QEvent *e);
 
 private slots:
-  void on_dial_sliderMoved(int position);
+  void on_dial_valueChanged(int value);
 
 private:
   Ui::MainWindow *ui;

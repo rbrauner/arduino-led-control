@@ -3,17 +3,7 @@
 
 #include <QtCore/qglobal.h>
 
-class LcdValue {
-public:
-  LcdValue();
-
-  int getMin() const;
-  int getMax() const;
-
-  int getValue() const;
-  void setValue(const int &value);
-
-private:
+struct LcdValue {
   enum LcdMinAndMax {
     MIN = 0,
     MAX = 254

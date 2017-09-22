@@ -24,8 +24,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += src/main.cpp \
-           src/mainwindow.cpp \
-    src/lcdvalue.cpp
+           src/mainwindow.cpp
 
 HEADERS += src/mainwindow.hpp \
     src/lcdvalue.hpp

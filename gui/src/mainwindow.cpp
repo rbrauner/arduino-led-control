@@ -10,30 +10,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
   openAndSetupSerial();
 }
 
-MainWindow::~MainWindow() {
-  delete ui;
-}
-
-void MainWindow::changeEvent(QEvent *e) {
-  QMainWindow::changeEvent(e);
-  switch (e->type()) {
-    case QEvent::LanguageChange:
-      ui->retranslateUi(this);
-      break;
-    default:
-      break;
-  }
-}
-
-void MainWindow::on_dial_sliderMoved(int position) {
-  setLcdValue(position);
-  sendValueToSerial();
-  updateLcd();
-}
-
 void MainWindow::setMinAndMaxDialValues() {
-  ui->dial->setMinimum(lcdValue.getMin());
-  ui->dial->setMaximum(lcdValue.getMax());
+  ui->dial->setMinimum(lcdValue.MIN);
+  ui->dial->setMaximum(lcdValue.MAX);
 }
 
 void MainWindow::setSerialPortName(QString portName) {
@@ -61,20 +40,41 @@ void MainWindow::closeSerial() {
   serial.close();
 }
 
+MainWindow::~MainWindow() {
+  delete ui;
+}
+
+void MainWindow::changeEvent(QEvent *e) {
+  QMainWindow::changeEvent(e);
+  switch (e->type()) {
+    case QEvent::LanguageChange:
+      ui->retranslateUi(this);
+      break;
+    default:
+      break;
+  }
+}
+
+void MainWindow::on_dial_valueChanged(int value) {
+  setLcdValue(value);
+  sendValueToSerial();
+  updateLcd();
+}
+
 void MainWindow::setLcdValue(const int &value) {
-  lcdValue.setValue(value);
+  lcdValue.value = value;
 }
 
 void MainWindow::sendValueToSerial() {
   QByteArray valueToSend;
   valueToSend.resize(1);
-  valueToSend[0] = static_cast<char>(lcdValue.getValue());
+  valueToSend[0] = static_cast<char>(lcdValue.value);
 
   serial.write(valueToSend);
   serial.flush();
 }
 
 void MainWindow::updateLcd() {
-  int valueToDisplay = lcdValue.getValue();
+  int valueToDisplay = lcdValue.value;
   ui->lcdNumber->display(valueToDisplay);
 }
