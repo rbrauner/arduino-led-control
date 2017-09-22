@@ -1,11 +1,24 @@
 #ifndef SERIALDIALOG_HPP
 #define SERIALDIALOG_HPP
 
-#include <QtCore/qglobal.h>
+#include <QDialog>
 
-class SerialDialog {
+namespace Ui {
+class SerialDialog;
+}
+
+class SerialDialog : public QDialog {
+  Q_OBJECT
+
 public:
-  SerialDialog();
+  explicit SerialDialog(QWidget *parent = 0);
+  ~SerialDialog();
+
+protected:
+  void changeEvent(QEvent *e);
+
+private:
+  Ui::SerialDialog *ui;
 };
 
 #endif // SERIALDIALOG_HPP

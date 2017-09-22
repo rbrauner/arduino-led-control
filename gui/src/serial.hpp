@@ -16,6 +16,7 @@ public:
 
   const QVector<SerialInfo> getInfo() const;
   void selectSerialInfo(const int &number);
+  void selectSerialInfoByDialog();
 
   const Serial &operator<<(const char &value);
   const Serial &operator<<(const short &value);

@@ -31,7 +31,8 @@ SOURCES += src/main.cpp \
 HEADERS += src/mainwindow.hpp \
     src/lcdvalue.hpp \
     src/serial.hpp \
-    src/serialdialog.hpp \
-    src/serialinfo.hpp
+    src/serialinfo.hpp \
+    src/serialdialog.hpp
 
-FORMS += src/mainwindow.ui
+FORMS += src/mainwindow.ui \
+    src/serialdialog.ui
