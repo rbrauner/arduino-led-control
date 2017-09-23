@@ -1,12 +1,12 @@
 #include "serialdialog.hpp"
 #include "ui_serialdialog.h"
 
-SerialDialog::SerialDialog(QVector<const SerialInfo *> info, QWidget *parent)
-    : QDialog(parent), ui(new Ui::SerialDialog) {
+SerialDialog::SerialDialog(Serial *serial, QWidget *parent)
+    : QDialog(parent), ui(new Ui::SerialDialog), serial(serial) {
   ui->setupUi(this);
 
   clearInfo();
-  initializeInfoEntryComboBox(info);
+  initializeInfoEntryComboBox();
 
   try {
     isAnyInfoAvaiable();
@@ -30,13 +30,12 @@ void SerialDialog::changeEvent(QEvent *e) {
 
 void SerialDialog::clearInfo() { info.clear(); }
 
-void SerialDialog::initializeInfoEntryComboBox(
-    QVector<const SerialInfo *> &info) {
-  for (auto i : info) {
+void SerialDialog::initializeInfoEntryComboBox() {
+  for (auto i : serial->getInfo()) {
     try {
-      isSerialInfoEntryAvaiable(i);
+      isSerialInfoEntryAvaiable(&i);
       info.append(i);
-      addItemToInfoEntryComboBox(i->portName);
+      addItemToInfoEntryComboBox(i.portName);
     } catch (...) {
     }
   }

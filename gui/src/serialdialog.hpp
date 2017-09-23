@@ -1,6 +1,7 @@
 #ifndef SERIALDIALOG_HPP
 #define SERIALDIALOG_HPP
 
+#include "serial.hpp"
 #include "serialinfo.hpp"
 #include <QDialog>
 #include <QVector>
@@ -13,7 +14,7 @@ class SerialDialog : public QDialog {
   Q_OBJECT
 
 public:
-  explicit SerialDialog(QVector<const SerialInfo *> info, QWidget *parent = 0);
+  explicit SerialDialog(Serial *serial, QWidget *parent = 0);
   ~SerialDialog();
 
 protected:
@@ -21,10 +22,11 @@ protected:
 
 private:
   Ui::SerialDialog *ui;
+  Serial *serial;
   QVector<SerialInfo> info;
 
   void clearInfo();
-  void initializeInfoEntryComboBox(QVector<const SerialInfo *> &info);
+  void initializeInfoEntryComboBox();
   void isSerialInfoEntryAvaiable(const SerialInfo *entry);
   void addItemToInfoEntryComboBox(const QString &name);
   void isAnyInfoAvaiable();
