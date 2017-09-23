@@ -92,47 +92,18 @@ void Serial::selectSerialInfoByDialog() {
 }
 
 const Serial &Serial::operator<<(const char &value) {
-  prepareDataAndSendIt(value);
-}
-
-const Serial &Serial::operator<<(const short &value) {
-  prepareDataAndSendIt(value);
+  prepareDataAndSendIt<char>(value);
 }
 
 const Serial &Serial::operator<<(const int &value) {
-  prepareDataAndSendIt(value);
-}
-
-const Serial &Serial::operator<<(const long &value) {
-  prepareDataAndSendIt(value);
-}
-
-const Serial &Serial::operator<<(const float &value) {
-  prepareDataAndSendIt(value);
-}
-
-const Serial &Serial::operator<<(const double &value) {
-  prepareDataAndSendIt(value);
-}
-
-const Serial &Serial::operator<<(const QString &value) {
-  prepareDataAndSendIt(value);
+  prepareDataAndSendIt<int>(value);
 }
 
 const Serial &Serial::operator>>(QByteArray &value) { value = receive(); }
 
 template <typename T> void Serial::prepareDataAndSendIt(const T &data) {
   try {
-    QByteArray dataToSend = prepareDataToSend(data);
-    isSerialOpen();
-    send(dataToSend);
-  } catch (...) {
-  }
-}
-
-void Serial::prepareDataAndSendIt(const QString &data) {
-  try {
-    const char *dataToSend = data.toStdString().c_str();
+    QByteArray dataToSend = prepareDataToSend<T>(data);
     isSerialOpen();
     send(dataToSend);
   } catch (...) {
@@ -141,7 +112,7 @@ void Serial::prepareDataAndSendIt(const QString &data) {
 
 template <typename T> QByteArray Serial::prepareDataToSend(const T &data) {
   QByteArray dataToSend;
-  dataToSend.resize(sizeof(T));
+  dataToSend.resize(1);
   dataToSend[0] = static_cast<char>(data);
   return dataToSend;
 }

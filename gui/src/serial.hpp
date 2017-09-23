@@ -21,12 +21,7 @@ public:
   void selectSerialInfoByDialog();
 
   const Serial &operator<<(const char &value);
-  const Serial &operator<<(const short &value);
   const Serial &operator<<(const int &value);
-  const Serial &operator<<(const long &value);
-  const Serial &operator<<(const float &value);
-  const Serial &operator<<(const double &value);
-  const Serial &operator<<(const QString &value);
 
   const Serial &operator>>(QByteArray &value);
 
@@ -41,7 +36,6 @@ private:
   void isSelectedSerialInfoValidAndAviable();
 
   template <typename T> void prepareDataAndSendIt(const T &data);
-  void prepareDataAndSendIt(const QString &data);
   template <typename T> QByteArray prepareDataToSend(const T &data);
   void isSerialOpen();
 
