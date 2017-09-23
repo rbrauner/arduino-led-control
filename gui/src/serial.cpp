@@ -9,10 +9,10 @@ void Serial::updateInfo() {
 
   QList<QSerialPortInfo> avaliablePorts = QSerialPortInfo::availablePorts();
   int howManyToReserve = avaliablePorts.size();
-  info.reserve(howManyToReserve);
+  info.resize(howManyToReserve);
 
   SerialInfo *infoEntry = &info[0];
-  for (auto port : avaliablePorts) {
+  for (QSerialPortInfo port : avaliablePorts) {
     infoEntry->isAviable = false;
     infoEntry->portName = "";
     infoEntry->vendorId = 0;
@@ -76,10 +76,10 @@ void Serial::selectSerialInfo(const int &number) {
 
 void Serial::selectSerialInfo(const QString &portName) {
   bool condition = true;
-  for (auto i : info) {
+  for (int i = 0; i < info.size(); i++) {
     if (condition) {
-      if (i.portName == portName) {
-        selectedSerialInfo = &i;
+      if (info[i].portName == portName) {
+        selectedSerialInfo = &info[i];
         condition = true;
       }
     }
@@ -88,7 +88,7 @@ void Serial::selectSerialInfo(const QString &portName) {
 
 void Serial::selectSerialInfoByDialog() {
   SerialDialog dialog(this);
-  dialog.show();
+  dialog.exec();
 }
 
 const Serial &Serial::operator<<(const char &value) {

@@ -63,23 +63,21 @@ void SerialDialog::fillInfoDetailsTreeWidgetWithInfoNumber(const int &number) {
   try {
     isSerialInfoAvaiable(number);
     fillInfoDetailsTreeWidgetEntryNumberWithInfo(
-        0, QString(info[number].isAviable));
+        0, QString(info[number].portName));
     fillInfoDetailsTreeWidgetEntryNumberWithInfo(
-        1, QString(info[number].portName));
+        1, QString(info[number].vendorId));
     fillInfoDetailsTreeWidgetEntryNumberWithInfo(
-        2, QString(info[number].vendorId));
+        2, QString(info[number].productId));
     fillInfoDetailsTreeWidgetEntryNumberWithInfo(
-        3, QString(info[number].productId));
+        3, QString(info[number].baudRate));
     fillInfoDetailsTreeWidgetEntryNumberWithInfo(
-        4, QString(info[number].baudRate));
-    fillInfoDetailsTreeWidgetEntryNumberWithInfo(
-        5, QString(info[number].dataBits));
-    fillInfoDetailsTreeWidgetEntryNumberWithInfo(6,
+        4, QString(info[number].dataBits));
+    fillInfoDetailsTreeWidgetEntryNumberWithInfo(5,
                                                  QString(info[number].parity));
     fillInfoDetailsTreeWidgetEntryNumberWithInfo(
-        7, QString(info[number].stopBits));
+        6, QString(info[number].stopBits));
     fillInfoDetailsTreeWidgetEntryNumberWithInfo(
-        8, QString(info[number].flowControl));
+        7, QString(info[number].flowControl));
   } catch (...) {
     throw;
   }
