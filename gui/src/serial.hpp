@@ -1,6 +1,7 @@
 #ifndef SERIAL_HPP
 #define SERIAL_HPP
 
+#include "serialdialog.hpp"
 #include "serialinfo.hpp"
 #include <QSerialPort>
 #include <QVector>

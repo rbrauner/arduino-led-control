@@ -4,10 +4,12 @@
 #include <QMainWindow>
 
 #include "lcdvalue.hpp"
+#include "serial.hpp"
+#include "serialdialog.hpp"
 #include <QSerialPort>
 
 namespace Ui {
-  class MainWindow;
+class MainWindow;
 }
 
 class MainWindow : public QMainWindow {
@@ -23,17 +25,16 @@ protected:
 private slots:
   void on_dial_valueChanged(int value);
 
+  void on_selectSerialPushButton_clicked();
+
 private:
   Ui::MainWindow *ui;
   LcdValue lcdValue;
-  QSerialPort serial;
+  Serial serial;
 
   void setMinAndMaxDialValues();
 
-  void setSerialPortName(QString portName);
   void openAndSetupSerial();
-  void openSerial(const QIODevice::OpenModeFlag &mode);
-  void setupSerial();
   void closeSerial();
 
   void setLcdValue(const int &value);

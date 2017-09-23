@@ -86,6 +86,11 @@ void Serial::selectSerialInfo(const QString &portName) {
   }
 }
 
+void Serial::selectSerialInfoByDialog() {
+  SerialDialog dialog(this);
+  dialog.show();
+}
+
 const Serial &Serial::operator<<(const char &value) {
   prepareDataAndSendIt(value);
 }

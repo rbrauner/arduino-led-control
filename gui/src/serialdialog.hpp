@@ -6,6 +6,8 @@
 #include <QDialog>
 #include <QVector>
 
+class Serial;
+
 namespace Ui {
 class SerialDialog;
 }
@@ -19,6 +21,9 @@ public:
 
 protected:
   void changeEvent(QEvent *e);
+
+private slots:
+  void on_selectPushButton_clicked();
 
 private:
   Ui::SerialDialog *ui;
