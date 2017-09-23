@@ -10,7 +10,7 @@ SerialDialog::SerialDialog(QVector<const SerialInfo *> info, QWidget *parent)
 
   try {
     isAnyInfoAvaiable();
-    fillSerialInfoDetailsTreeWidgetWithInfoNumber(0);
+    fillInfoDetailsTreeWidgetWithInfoNumber(0);
   } catch (...) {
   }
 }
@@ -60,10 +60,27 @@ void SerialDialog::isAnyInfoAvaiable() {
     throw;
 }
 
-void SerialDialog::fillSerialInfoDetailsTreeWidgetWithInfoNumber(
-    const int &number) {
+void SerialDialog::fillInfoDetailsTreeWidgetWithInfoNumber(const int &number) {
   try {
     isSerialInfoAvaiable(number);
+    fillInfoDetailsTreeWidgetEntryNumberWithInfo(
+        0, QString(info[number].isAviable));
+    fillInfoDetailsTreeWidgetEntryNumberWithInfo(
+        1, QString(info[number].portName));
+    fillInfoDetailsTreeWidgetEntryNumberWithInfo(
+        2, QString(info[number].vendorId));
+    fillInfoDetailsTreeWidgetEntryNumberWithInfo(
+        3, QString(info[number].productId));
+    fillInfoDetailsTreeWidgetEntryNumberWithInfo(
+        4, QString(info[number].baudRate));
+    fillInfoDetailsTreeWidgetEntryNumberWithInfo(
+        5, QString(info[number].dataBits));
+    fillInfoDetailsTreeWidgetEntryNumberWithInfo(6,
+                                                 QString(info[number].parity));
+    fillInfoDetailsTreeWidgetEntryNumberWithInfo(
+        7, QString(info[number].stopBits));
+    fillInfoDetailsTreeWidgetEntryNumberWithInfo(
+        8, QString(info[number].flowControl));
   } catch (...) {
     throw;
   }
@@ -74,4 +91,11 @@ void SerialDialog::isSerialInfoAvaiable(const int &number) {
     return;
   else
     throw;
+}
+
+void SerialDialog::fillInfoDetailsTreeWidgetEntryNumberWithInfo(
+    const int &number, const QString &info) {
+  QTreeWidgetItem *entry = ui->infoDetailsTreeWidget->topLevelItem(number);
+  entry->setText(1, info);
+  ui->infoDetailsTreeWidget->editItem(entry);
 }

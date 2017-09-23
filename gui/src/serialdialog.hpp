@@ -28,8 +28,10 @@ private:
   void isSerialInfoEntryAvaiable(const SerialInfo *entry);
   void addItemToInfoEntryComboBox(const QString &name);
   void isAnyInfoAvaiable();
-  void fillSerialInfoDetailsTreeWidgetWithInfoNumber(const int &number);
+  void fillInfoDetailsTreeWidgetWithInfoNumber(const int &number);
   void isSerialInfoAvaiable(const int &number);
+  void fillInfoDetailsTreeWidgetEntryNumberWithInfo(const int &number,
+                                                    const QString &info);
 };
 
 #endif // SERIALDIALOG_HPP
