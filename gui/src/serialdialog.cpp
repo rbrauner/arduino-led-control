@@ -98,3 +98,9 @@ void SerialDialog::fillInfoDetailsTreeWidgetEntryNumberWithInfo(
   entry->setText(1, info);
   ui->infoDetailsTreeWidget->editItem(entry);
 }
+
+void SerialDialog::on_selectPushButton_clicked() {
+  QString selectedPortName = ui->infoEntryComboBox->currentText();
+  serial->selectSerialInfo(selectedPortName);
+  close();
+}

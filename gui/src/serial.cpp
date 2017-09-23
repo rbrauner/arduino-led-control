@@ -74,6 +74,18 @@ void Serial::selectSerialInfo(const int &number) {
   selectedSerialInfo = &info[number];
 }
 
+void Serial::selectSerialInfo(const QString &portName) {
+  bool condition = true;
+  for (auto i : info) {
+    if (condition) {
+      if (i.portName == portName) {
+        selectedSerialInfo = &i;
+        condition = true;
+      }
+    }
+  }
+}
+
 const Serial &Serial::operator<<(const char &value) {
   prepareDataAndSendIt(value);
 }
