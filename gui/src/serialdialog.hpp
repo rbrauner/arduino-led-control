@@ -25,8 +25,11 @@ private:
 
   void clearInfo();
   void initializeInfoEntryComboBox(QVector<const SerialInfo *> &info);
-  void isAvaiable(const SerialInfo *entry);
+  void isSerialInfoEntryAvaiable(const SerialInfo *entry);
   void addItemToInfoEntryComboBox(const QString &name);
+  void isAnyInfoAvaiable();
+  void fillSerialInfoDetailsTreeWidgetWithInfoNumber(const int &number);
+  void isSerialInfoAvaiable(const int &number);
 };
 
 #endif // SERIALDIALOG_HPP

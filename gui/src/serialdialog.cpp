@@ -7,6 +7,12 @@ SerialDialog::SerialDialog(QVector<const SerialInfo *> info, QWidget *parent)
 
   clearInfo();
   initializeInfoEntryComboBox(info);
+
+  try {
+    isAnyInfoAvaiable();
+    fillSerialInfoDetailsTreeWidgetWithInfoNumber(0);
+  } catch (...) {
+  }
 }
 
 SerialDialog::~SerialDialog() { delete ui; }
@@ -28,7 +34,7 @@ void SerialDialog::initializeInfoEntryComboBox(
     QVector<const SerialInfo *> &info) {
   for (auto i : info) {
     try {
-      isAvaiable(i);
+      isSerialInfoEntryAvaiable(i);
       info.append(i);
       addItemToInfoEntryComboBox(i->portName);
     } catch (...) {
@@ -36,7 +42,7 @@ void SerialDialog::initializeInfoEntryComboBox(
   }
 }
 
-void SerialDialog::isAvaiable(const SerialInfo *entry) {
+void SerialDialog::isSerialInfoEntryAvaiable(const SerialInfo *entry) {
   if (entry->isAviable == true)
     return;
   else
@@ -45,4 +51,27 @@ void SerialDialog::isAvaiable(const SerialInfo *entry) {
 
 void SerialDialog::addItemToInfoEntryComboBox(const QString &name) {
   ui->infoEntryComboBox->addItem(name);
+}
+
+void SerialDialog::isAnyInfoAvaiable() {
+  if (info.size() != 0)
+    return;
+  else
+    throw;
+}
+
+void SerialDialog::fillSerialInfoDetailsTreeWidgetWithInfoNumber(
+    const int &number) {
+  try {
+    isSerialInfoAvaiable(number);
+  } catch (...) {
+    throw;
+  }
+}
+
+void SerialDialog::isSerialInfoAvaiable(const int &number) {
+  if (number < info.size())
+    return;
+  else
+    throw;
 }
