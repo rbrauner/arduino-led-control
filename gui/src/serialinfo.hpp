@@ -5,15 +5,15 @@
 #include <QString>
 
 struct SerialInfo {
-  bool isAviable;
-  QString portName;
-  quint16 vendorId;
-  quint16 productId;
-  QSerialPort::BaudRate baudRate;
-  QSerialPort::DataBits dataBits;
-  QSerialPort::Parity parity;
-  QSerialPort::StopBits stopBits;
-  QSerialPort::FlowControl flowControl;
+  bool isAviable = false;
+  QString portName = "";
+  quint16 vendorId = 0;
+  quint16 productId = 0;
+  QSerialPort::BaudRate baudRate = QSerialPort::UnknownBaud;
+  QSerialPort::DataBits dataBits = QSerialPort::UnknownDataBits;
+  QSerialPort::Parity parity = QSerialPort::UnknownParity;
+  QSerialPort::StopBits stopBits = QSerialPort::UnknownStopBits;
+  QSerialPort::FlowControl flowControl = QSerialPort::UnknownFlowControl;
 };
 
 #endif // SERIALINFO_HPP
