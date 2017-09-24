@@ -7,23 +7,11 @@ MainWindow::MainWindow(QWidget *parent)
 
   setMinAndMaxDialValues();
 
-  serial.updateInfo();
-  serial.selectSerialInfoByDialog();
-
-  openAndSetupSerial();
+  emit on_selectSerialPushButton_clicked();
 }
-
-void MainWindow::setMinAndMaxDialValues() {
-  ui->dial->setMinimum(lcdValue.MIN);
-  ui->dial->setMaximum(lcdValue.MAX);
-}
-
-void MainWindow::openAndSetupSerial() { serial.openAndSetup(); }
-
-void MainWindow::closeSerial() { serial.close(); }
 
 MainWindow::~MainWindow() {
-  serial.close();
+  closeSerial();
   delete ui;
 }
 
@@ -37,6 +25,21 @@ void MainWindow::changeEvent(QEvent *e) {
     break;
   }
 }
+
+void MainWindow::setMinAndMaxDialValues() {
+  ui->dial->setMinimum(lcdValue.MIN);
+  ui->dial->setMaximum(lcdValue.MAX);
+}
+
+void MainWindow::on_selectSerialPushButton_clicked() {
+  serial.updateInfo();
+  serial.selectSerialInfoByDialog();
+  openAndSetupSerial();
+}
+
+void MainWindow::openAndSetupSerial() { serial.openAndSetup(); }
+
+void MainWindow::closeSerial() { serial.close(); }
 
 void MainWindow::on_dial_valueChanged(int value) {
   setLcdValue(value);
@@ -53,10 +56,4 @@ void MainWindow::sendValueToSerial() {
 void MainWindow::updateLcd() {
   int valueToDisplay = lcdValue.getValue();
   ui->lcdNumber->display(valueToDisplay);
-}
-
-void MainWindow::on_selectSerialPushButton_clicked() {
-  serial.updateInfo();
-  serial.selectSerialInfoByDialog();
-  openAndSetupSerial();
 }
