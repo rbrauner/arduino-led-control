@@ -55,4 +55,5 @@ void MainWindow::updateLcd() {
 void MainWindow::on_selectSerialPushButton_clicked() {
   serial.updateInfo();
   serial.selectSerialInfoByDialog();
+  openAndSetupSerial();
 }
