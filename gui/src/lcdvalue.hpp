@@ -5,6 +5,8 @@
 
 struct LcdValue {
 public:
+  LcdValue();
+
   enum LcdMinAndMax { MIN = 0, MAX = 254 };
 
   int getValue() const;
