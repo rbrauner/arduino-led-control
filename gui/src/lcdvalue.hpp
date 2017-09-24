@@ -11,7 +11,7 @@ public:
   void setValue(int value);
 
 private:
-  char value;
+  unsigned char value;
 };
 
 #endif // LCDVALUE_HPP
