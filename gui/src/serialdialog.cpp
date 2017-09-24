@@ -11,7 +11,7 @@ SerialDialog::SerialDialog(Serial *serial, QWidget *parent)
     initializeInfoEntryComboBox();
 
     isAnyInfoAvaiable();
-    fillInfoDetailsTreeWidgetWithInfoNumber(0);
+    fillInInfoDetailsTreeWidgetWithInfoNumber(0);
   } catch (...) {
   }
 }
@@ -56,31 +56,24 @@ void SerialDialog::addItemToInfoEntryComboBox(const QString &name) {
 }
 
 void SerialDialog::isAnyInfoAvaiable() {
-  if (info.size() != 0)
+  if (info.size() > 0)
     return;
   else
     throw 1;
 }
 
-void SerialDialog::fillInfoDetailsTreeWidgetWithInfoNumber(const int &number) {
+void SerialDialog::fillInInfoDetailsTreeWidgetWithInfoNumber(
+    const int &number) {
   try {
     isSerialInfoAvaiable(number);
-    fillInfoDetailsTreeWidgetEntryNumberWithInfo(
-        0, QString(info[number].portName));
-    fillInfoDetailsTreeWidgetEntryNumberWithInfo(
-        1, QString(info[number].vendorId));
-    fillInfoDetailsTreeWidgetEntryNumberWithInfo(
-        2, QString(info[number].productId));
-    fillInfoDetailsTreeWidgetEntryNumberWithInfo(
-        3, QString(info[number].baudRate));
-    fillInfoDetailsTreeWidgetEntryNumberWithInfo(
-        4, QString(info[number].dataBits));
-    fillInfoDetailsTreeWidgetEntryNumberWithInfo(5,
-                                                 QString(info[number].parity));
-    fillInfoDetailsTreeWidgetEntryNumberWithInfo(
-        6, QString(info[number].stopBits));
-    fillInfoDetailsTreeWidgetEntryNumberWithInfo(
-        7, QString(info[number].flowControl));
+    fillInInfoDetailsTreeWidgetEntryNumberWithInfo(0, info[number].portName);
+    fillInInfoDetailsTreeWidgetEntryNumberWithInfo(1, info[number].vendorId);
+    fillInInfoDetailsTreeWidgetEntryNumberWithInfo(2, info[number].productId);
+    fillInInfoDetailsTreeWidgetEntryNumberWithInfo(3, info[number].baudRate);
+    fillInInfoDetailsTreeWidgetEntryNumberWithInfo(4, info[number].dataBits);
+    fillInInfoDetailsTreeWidgetEntryNumberWithInfo(5, info[number].parity);
+    fillInInfoDetailsTreeWidgetEntryNumberWithInfo(6, info[number].stopBits);
+    fillInInfoDetailsTreeWidgetEntryNumberWithInfo(7, info[number].flowControl);
   } catch (...) {
     throw 1;
   }
@@ -93,11 +86,45 @@ void SerialDialog::isSerialInfoAvaiable(const int &number) {
     throw 1;
 }
 
-void SerialDialog::fillInfoDetailsTreeWidgetEntryNumberWithInfo(
+void SerialDialog::fillInInfoDetailsTreeWidgetEntryNumberWithInfo(
     const int &number, const QString &info) {
   QTreeWidgetItem *entry = ui->infoDetailsTreeWidget->topLevelItem(number);
   entry->setText(1, info);
   ui->infoDetailsTreeWidget->editItem(entry);
+}
+
+void SerialDialog::fillInInfoDetailsTreeWidgetEntryNumberWithInfo(
+    const int &number, const quint16 &info) {
+  fillInInfoDetailsTreeWidgetEntryNumberWithInfo(number, QString::number(info));
+}
+
+void SerialDialog::fillInInfoDetailsTreeWidgetEntryNumberWithInfo(
+    const int &number, const QSerialPort::BaudRate &info) {
+  fillInInfoDetailsTreeWidgetEntryNumberWithInfo(number, QString::number(info));
+}
+
+void SerialDialog::fillInInfoDetailsTreeWidgetEntryNumberWithInfo(
+    const int &number, const QSerialPort::DataBits &info) {
+  fillInInfoDetailsTreeWidgetEntryNumberWithInfo(number, QString::number(info));
+}
+
+void SerialDialog::fillInInfoDetailsTreeWidgetEntryNumberWithInfo(
+    const int &number, const QSerialPort::Parity &info) {
+  fillInInfoDetailsTreeWidgetEntryNumberWithInfo(number, QString::number(info));
+}
+
+void SerialDialog::fillInInfoDetailsTreeWidgetEntryNumberWithInfo(
+    const int &number, const QSerialPort::StopBits &info) {
+  fillInInfoDetailsTreeWidgetEntryNumberWithInfo(number, QString::number(info));
+}
+
+void SerialDialog::fillInInfoDetailsTreeWidgetEntryNumberWithInfo(
+    const int &number, const QSerialPort::FlowControl &info) {
+  fillInInfoDetailsTreeWidgetEntryNumberWithInfo(number, QString::number(info));
+}
+
+void SerialDialog::on_infoEntryComboBox_currentIndexChanged(int index) {
+  fillInInfoDetailsTreeWidgetWithInfoNumber(index);
 }
 
 void SerialDialog::on_selectPushButton_clicked() {

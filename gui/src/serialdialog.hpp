@@ -23,6 +23,7 @@ protected:
   void changeEvent(QEvent *e);
 
 private slots:
+  void on_infoEntryComboBox_currentIndexChanged(int index);
   void on_selectPushButton_clicked();
 
 private:
@@ -36,10 +37,22 @@ private:
   void isSerialInfoEntryAvaiable(const SerialInfo *entry);
   void addItemToInfoEntryComboBox(const QString &name);
   void isAnyInfoAvaiable();
-  void fillInfoDetailsTreeWidgetWithInfoNumber(const int &number);
+  void fillInInfoDetailsTreeWidgetWithInfoNumber(const int &number);
   void isSerialInfoAvaiable(const int &number);
-  void fillInfoDetailsTreeWidgetEntryNumberWithInfo(const int &number,
-                                                    const QString &info);
+  void fillInInfoDetailsTreeWidgetEntryNumberWithInfo(const int &number,
+                                                      const QString &info);
+  void fillInInfoDetailsTreeWidgetEntryNumberWithInfo(const int &number,
+                                                      const quint16 &info);
+  void fillInInfoDetailsTreeWidgetEntryNumberWithInfo(
+      const int &number, const QSerialPort::BaudRate &info);
+  void fillInInfoDetailsTreeWidgetEntryNumberWithInfo(
+      const int &number, const QSerialPort::DataBits &info);
+  void fillInInfoDetailsTreeWidgetEntryNumberWithInfo(
+      const int &number, const QSerialPort::Parity &info);
+  void fillInInfoDetailsTreeWidgetEntryNumberWithInfo(
+      const int &number, const QSerialPort::StopBits &info);
+  void fillInInfoDetailsTreeWidgetEntryNumberWithInfo(
+      const int &number, const QSerialPort::FlowControl &info);
 };
 
 #endif // SERIALDIALOG_HPP
