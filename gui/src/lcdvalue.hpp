@@ -4,12 +4,14 @@
 #include <QtCore/qglobal.h>
 
 struct LcdValue {
-  enum LcdMinAndMax {
-    MIN = 0,
-    MAX = 254
-  };
+public:
+  enum LcdMinAndMax { MIN = 0, MAX = 254 };
 
-  int value;
+  int getValue() const;
+  void setValue(int value);
+
+private:
+  char value;
 };
 
 #endif // LCDVALUE_HPP

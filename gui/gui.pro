@@ -26,7 +26,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += src/main.cpp \
            src/mainwindow.cpp \
     src/serial.cpp \
-    src/serialdialog.cpp
+    src/serialdialog.cpp \
+    src/lcdvalue.cpp
 
 HEADERS += src/mainwindow.hpp \
     src/lcdvalue.hpp \
