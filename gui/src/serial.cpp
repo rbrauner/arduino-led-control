@@ -7,6 +7,7 @@ Serial::Serial() : selectedSerialInfo(0) { updateInfo(); }
 void Serial::updateInfo() {
   try {
     clearInfo();
+    clearSelectedSerial();
 
     QList<QSerialPortInfo> avaliablePorts = QSerialPortInfo::availablePorts();
     int howManyToReserve = avaliablePorts.size();
@@ -43,6 +44,8 @@ void Serial::updateInfo() {
 }
 
 void Serial::clearInfo() { info.clear(); }
+
+void Serial::clearSelectedSerial() { selectedSerialInfo = 0; }
 
 void Serial::isAnyInfoAvaiable() {
   if (info.size() > 0)

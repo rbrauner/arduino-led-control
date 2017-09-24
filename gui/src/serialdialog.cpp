@@ -5,10 +5,11 @@ SerialDialog::SerialDialog(Serial *serial, QWidget *parent)
     : QDialog(parent), ui(new Ui::SerialDialog), serial(serial) {
   ui->setupUi(this);
 
-  clearInfo();
-  initializeInfoEntryComboBox();
-
   try {
+    clearInfo();
+    clearSelectedSerial();
+    initializeInfoEntryComboBox();
+
     isAnyInfoAvaiable();
     fillInfoDetailsTreeWidgetWithInfoNumber(0);
   } catch (...) {
@@ -29,6 +30,8 @@ void SerialDialog::changeEvent(QEvent *e) {
 }
 
 void SerialDialog::clearInfo() { info.clear(); }
+
+void SerialDialog::clearSelectedSerial() { serial->clearSelectedSerial(); }
 
 void SerialDialog::initializeInfoEntryComboBox() {
   for (auto i : serial->getInfo()) {

@@ -31,6 +31,7 @@ private:
   QVector<SerialInfo> info;
 
   void clearInfo();
+  void clearSelectedSerial();
   void initializeInfoEntryComboBox();
   void isSerialInfoEntryAvaiable(const SerialInfo *entry);
   void addItemToInfoEntryComboBox(const QString &name);

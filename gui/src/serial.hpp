@@ -11,6 +11,7 @@ class Serial {
 public:
   Serial();
 
+  void clearSelectedSerial();
   void updateInfo();
   void openAndSetup();
   void close();
