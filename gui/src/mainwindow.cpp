@@ -22,7 +22,10 @@ void MainWindow::openAndSetupSerial() { serial.openAndSetup(); }
 
 void MainWindow::closeSerial() { serial.close(); }
 
-MainWindow::~MainWindow() { delete ui; }
+MainWindow::~MainWindow() {
+  serial.close();
+  delete ui;
+}
 
 void MainWindow::changeEvent(QEvent *e) {
   QMainWindow::changeEvent(e);
