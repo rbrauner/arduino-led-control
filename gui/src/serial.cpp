@@ -70,7 +70,7 @@ void Serial::openAndSetup() {
   }
 }
 
-void Serial::isSelectedSerialInfoValidAndAviable() {
+void Serial::isSelectedSerialInfoValidAndAviable() const {
   if (selectedSerialInfo != NULL && selectedSerialInfo->isAviable == true)
     return;
   else
@@ -144,3 +144,12 @@ void Serial::isSerialOpen() {
 void Serial::send(const QByteArray &data) { serial.write(data); }
 
 QByteArray Serial::receive() { return serial.readAll(); }
+
+const QString Serial::getSelectedSerialPortName() const {
+  try {
+    isSelectedSerialInfoValidAndAviable();
+    return selectedSerialInfo->portName;
+  } catch (...) {
+    return "There is no port available";
+  }
+}

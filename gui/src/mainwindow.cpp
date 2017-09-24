@@ -35,6 +35,9 @@ void MainWindow::on_selectSerialPushButton_clicked() {
   serial.updateInfo();
   serial.selectSerialInfoByDialog();
   openAndSetupSerial();
+
+  QString statusBarMessage = serial.getSelectedSerialPortName();
+  ui->statusBar->showMessage(statusBarMessage);
 }
 
 void MainWindow::openAndSetupSerial() { serial.openAndSetup(); }

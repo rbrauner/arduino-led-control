@@ -25,6 +25,8 @@ public:
   const Serial &operator<<(const char &value);
   const Serial &operator>>(QByteArray &value);
 
+  const QString getSelectedSerialPortName() const;
+
 private:
   QSerialPort serial;
   QVector<SerialInfo> info;
@@ -35,7 +37,7 @@ private:
   void fillInInfoEntry();
   void open(const QIODevice::OpenModeFlag &mode);
   void setup();
-  void isSelectedSerialInfoValidAndAviable();
+  void isSelectedSerialInfoValidAndAviable() const;
 
   template <typename T> void prepareDataAndSendIt(const T &data);
   template <typename T> QByteArray prepareDataToSend(const T &data);
