@@ -45,7 +45,7 @@ void SerialDialog::isSerialInfoEntryAvaiable(const SerialInfo *entry) {
   if (entry->isAviable == true)
     return;
   else
-    throw;
+    throw 1;
 }
 
 void SerialDialog::addItemToInfoEntryComboBox(const QString &name) {
@@ -56,7 +56,7 @@ void SerialDialog::isAnyInfoAvaiable() {
   if (info.size() != 0)
     return;
   else
-    throw;
+    throw 1;
 }
 
 void SerialDialog::fillInfoDetailsTreeWidgetWithInfoNumber(const int &number) {
@@ -79,7 +79,7 @@ void SerialDialog::fillInfoDetailsTreeWidgetWithInfoNumber(const int &number) {
     fillInfoDetailsTreeWidgetEntryNumberWithInfo(
         7, QString(info[number].flowControl));
   } catch (...) {
-    throw;
+    throw 1;
   }
 }
 
@@ -87,7 +87,7 @@ void SerialDialog::isSerialInfoAvaiable(const int &number) {
   if (number < info.size())
     return;
   else
-    throw;
+    throw 1;
 }
 
 void SerialDialog::fillInfoDetailsTreeWidgetEntryNumberWithInfo(

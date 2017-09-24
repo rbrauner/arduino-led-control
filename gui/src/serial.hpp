@@ -30,6 +30,7 @@ private:
   const SerialInfo *selectedSerialInfo;
 
   void clearInfo();
+  void isAnyInfoAvaiable();
   void open(const QIODevice::OpenModeFlag &mode);
   void setup();
   void isSelectedSerialInfoValidAndAviable();

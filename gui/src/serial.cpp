@@ -5,39 +5,51 @@
 Serial::Serial() : selectedSerialInfo(0) { updateInfo(); }
 
 void Serial::updateInfo() {
-  clearInfo();
+  try {
+    clearInfo();
 
-  QList<QSerialPortInfo> avaliablePorts = QSerialPortInfo::availablePorts();
-  int howManyToReserve = avaliablePorts.size();
-  info.resize(howManyToReserve);
+    QList<QSerialPortInfo> avaliablePorts = QSerialPortInfo::availablePorts();
+    int howManyToReserve = avaliablePorts.size();
+    info.resize(howManyToReserve);
 
-  SerialInfo *infoEntry = &info[0];
-  for (QSerialPortInfo port : avaliablePorts) {
-    infoEntry->isAviable = false;
-    infoEntry->portName = "";
-    infoEntry->vendorId = 0;
-    infoEntry->productId = 0;
+    isAnyInfoAvaiable();
+    SerialInfo *infoEntry = &info[0];
 
-    if (port.hasVendorIdentifier()) {
-      infoEntry->vendorId = port.vendorIdentifier();
-      if (port.hasProductIdentifier()) {
-        infoEntry->productId = port.productIdentifier();
-        infoEntry->portName = port.portName();
-        infoEntry->isAviable = true;
+    for (QSerialPortInfo port : avaliablePorts) {
+      infoEntry->isAviable = false;
+      infoEntry->portName = "";
+      infoEntry->vendorId = 0;
+      infoEntry->productId = 0;
+
+      if (port.hasVendorIdentifier()) {
+        infoEntry->vendorId = port.vendorIdentifier();
+        if (port.hasProductIdentifier()) {
+          infoEntry->productId = port.productIdentifier();
+          infoEntry->portName = port.portName();
+          infoEntry->isAviable = true;
+        }
       }
+
+      infoEntry->baudRate = QSerialPort::Baud9600;
+      infoEntry->dataBits = QSerialPort::Data8;
+      infoEntry->parity = QSerialPort::NoParity;
+      infoEntry->stopBits = QSerialPort::OneStop;
+      infoEntry->flowControl = QSerialPort::NoFlowControl;
+
+      infoEntry++;
     }
-
-    infoEntry->baudRate = QSerialPort::Baud9600;
-    infoEntry->dataBits = QSerialPort::Data8;
-    infoEntry->parity = QSerialPort::NoParity;
-    infoEntry->stopBits = QSerialPort::OneStop;
-    infoEntry->flowControl = QSerialPort::NoFlowControl;
-
-    infoEntry++;
+  } catch (...) {
   }
 }
 
 void Serial::clearInfo() { info.clear(); }
+
+void Serial::isAnyInfoAvaiable() {
+  if (info.size() > 0)
+    return;
+  else
+    throw 1;
+}
 
 void Serial::openAndSetup() {
   try {
@@ -53,7 +65,7 @@ void Serial::isSelectedSerialInfoValidAndAviable() {
   if (selectedSerialInfo != NULL && selectedSerialInfo->isAviable == true)
     return;
   else
-    throw;
+    throw 1;
 }
 
 void Serial::open(const QIODevice::OpenModeFlag &mode) { serial.open(mode); }
@@ -117,7 +129,7 @@ void Serial::isSerialOpen() {
   if (serial.isOpen())
     return;
   else
-    throw;
+    throw 1;
 }
 
 void Serial::send(const QByteArray &data) { serial.write(data); }
