@@ -95,10 +95,6 @@ const Serial &Serial::operator<<(const char &value) {
   prepareDataAndSendIt<char>(value);
 }
 
-const Serial &Serial::operator<<(const int &value) {
-  prepareDataAndSendIt<int>(value);
-}
-
 const Serial &Serial::operator>>(QByteArray &value) { value = receive(); }
 
 template <typename T> void Serial::prepareDataAndSendIt(const T &data) {
@@ -112,7 +108,7 @@ template <typename T> void Serial::prepareDataAndSendIt(const T &data) {
 
 template <typename T> QByteArray Serial::prepareDataToSend(const T &data) {
   QByteArray dataToSend;
-  dataToSend.resize(1);
+  dataToSend.resize(sizeof(T));
   dataToSend[0] = static_cast<char>(data);
   return dataToSend;
 }

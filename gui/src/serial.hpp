@@ -21,7 +21,6 @@ public:
   void selectSerialInfoByDialog();
 
   const Serial &operator<<(const char &value);
-  const Serial &operator<<(const int &value);
 
   const Serial &operator>>(QByteArray &value);
 

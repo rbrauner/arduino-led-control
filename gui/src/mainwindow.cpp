@@ -43,7 +43,9 @@ void MainWindow::on_dial_valueChanged(int value) {
 
 void MainWindow::setLcdValue(const int &value) { lcdValue.setValue(value); }
 
-void MainWindow::sendValueToSerial() { serial << lcdValue.getValue(); }
+void MainWindow::sendValueToSerial() {
+  serial << static_cast<char>(lcdValue.getValue());
+}
 
 void MainWindow::updateLcd() {
   int valueToDisplay = lcdValue.getValue();
