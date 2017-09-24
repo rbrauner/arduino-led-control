@@ -10,9 +10,10 @@
 class Serial {
 public:
   Serial();
+  ~Serial();
 
-  void clearSelectedSerial();
   void updateInfo();
+  void clearSelectedSerial();
   void openAndSetup();
   void close();
 
@@ -22,7 +23,6 @@ public:
   void selectSerialInfoByDialog();
 
   const Serial &operator<<(const char &value);
-
   const Serial &operator>>(QByteArray &value);
 
 private:
@@ -32,6 +32,7 @@ private:
 
   void clearInfo();
   void isAnyInfoAvaiable();
+  void fillInInfoEntry();
   void open(const QIODevice::OpenModeFlag &mode);
   void setup();
   void isSelectedSerialInfoValidAndAviable();

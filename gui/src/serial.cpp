@@ -4,41 +4,22 @@
 
 Serial::Serial() : selectedSerialInfo(0) { updateInfo(); }
 
+Serial::~Serial() {
+  clearInfo();
+  clearSelectedSerial();
+  close();
+}
+
 void Serial::updateInfo() {
   try {
     clearInfo();
     clearSelectedSerial();
 
-    QList<QSerialPortInfo> avaliablePorts = QSerialPortInfo::availablePorts();
-    int howManyToReserve = avaliablePorts.size();
+    int howManyToReserve = QSerialPortInfo::availablePorts().size();
     info.resize(howManyToReserve);
-
     isAnyInfoAvaiable();
-    SerialInfo *infoEntry = &info[0];
 
-    for (QSerialPortInfo port : avaliablePorts) {
-      infoEntry->isAviable = false;
-      infoEntry->portName = "";
-      infoEntry->vendorId = 0;
-      infoEntry->productId = 0;
-
-      if (port.hasVendorIdentifier()) {
-        infoEntry->vendorId = port.vendorIdentifier();
-        if (port.hasProductIdentifier()) {
-          infoEntry->productId = port.productIdentifier();
-          infoEntry->portName = port.portName();
-          infoEntry->isAviable = true;
-        }
-      }
-
-      infoEntry->baudRate = QSerialPort::Baud9600;
-      infoEntry->dataBits = QSerialPort::Data8;
-      infoEntry->parity = QSerialPort::NoParity;
-      infoEntry->stopBits = QSerialPort::OneStop;
-      infoEntry->flowControl = QSerialPort::NoFlowControl;
-
-      infoEntry++;
-    }
+    fillInInfoEntry();
   } catch (...) {
   }
 }
@@ -52,6 +33,31 @@ void Serial::isAnyInfoAvaiable() {
     return;
   else
     throw 1;
+}
+
+void Serial::fillInInfoEntry() {
+  const QList<QSerialPortInfo> availablePorts =
+      QSerialPortInfo::availablePorts();
+  SerialInfo *infoEntry = &info[0];
+
+  for (auto port : availablePorts) {
+    if (port.hasVendorIdentifier()) {
+      infoEntry->vendorId = port.vendorIdentifier();
+      if (port.hasProductIdentifier()) {
+        infoEntry->productId = port.productIdentifier();
+        infoEntry->portName = port.portName();
+        infoEntry->isAviable = true;
+      }
+    }
+
+    infoEntry->baudRate = QSerialPort::Baud9600;
+    infoEntry->dataBits = QSerialPort::Data8;
+    infoEntry->parity = QSerialPort::NoParity;
+    infoEntry->stopBits = QSerialPort::OneStop;
+    infoEntry->flowControl = QSerialPort::NoFlowControl;
+
+    infoEntry++;
+  }
 }
 
 void Serial::openAndSetup() {
@@ -90,14 +96,14 @@ void Serial::selectSerialInfo(const int &number) {
 }
 
 void Serial::selectSerialInfo(const QString &portName) {
-  bool condition = true;
-  for (int i = 0; i < info.size(); i++) {
-    if (condition) {
-      if (info[i].portName == portName) {
-        selectedSerialInfo = &info[i];
-        condition = true;
-      }
+  int i = 0;
+
+  for (auto infoEntry : info) {
+    if (infoEntry.portName == portName) {
+      selectedSerialInfo = &info[i];
+      return;
     }
+    i++;
   }
 }
 
