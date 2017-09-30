@@ -1,3 +1,4 @@
+src
 /opt/arduino/hardware/arduino/avr/cores/arduino
 /opt/arduino/libraries/Bridge/src
 /opt/arduino/libraries/Esplora/src
@@ -15,9 +16,9 @@
 /opt/arduino/libraries/Temboo/src
 /opt/arduino/libraries/TFT/src
 /opt/arduino/libraries/WiFi/src
-/opt/arduinohardware/arduino/avr/libraries/EEPROM
-/opt/arduino/hardware/arduino/avr/libraries/SoftwareSerial
-/opt/arduino/hardware/arduino/avr/libraries/SPI
-/opt/arduino/hardware/arduino/avr/libraries/Wire
+/opt/arduino/hardware/arduino/avr/libraries/EEPROM/src
+/opt/arduino/hardware/arduino/avr/libraries/SoftwareSerial/src
+/opt/arduino/hardware/arduino/avr/libraries/SPI/src
+/opt/arduino/hardware/arduino/avr/libraries/Wire/src
 /opt/arduino/hardware/tools/avr/avr/include
 /opt/arduino/hardware/arduino/avr/variants/standard
